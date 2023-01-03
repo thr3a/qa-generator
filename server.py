@@ -27,7 +27,10 @@ examples = [
   '主人公のハリー・ポッターは、幼いころに魔法使いの親戚であるダンブルドア一家に引き取られ、そこでは魔法界の隠れ家として知られるホグワーツ魔法魔術学校で魔法を学ぶことになります。ハリーは、自分が有能な魔法使いであることを知らずに育ちますが、それは、彼を巨大な悪を倒すための英雄とするためであることを知ることになります。それは、彼が小さい頃に、魔法界を支配しようとしている恐ろしい魔法使いであるヴォルデモートという人物によって、彼の両親を殺されたことが原因です。ヴォルデモートは、彼が最強の魔法使いであることを望んでおり、彼を倒すことができればその夢を叶えることができると考えています。ハリーは、ホグワーツで学んだ魔法を使い、ヴォルデモートを倒すために、魔法界の仲間たちとともに戦います。彼は、自分が有能な魔法使いであることを知ってから、多くの人々を救い、ヴォルデモートを倒すことに成功します。'
 ]
 
-with gr.Blocks() as demo:
+custom_css = 'footer {visibility: hidden} .gr-sample-textbox {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}'
+with gr.Blocks(css=custom_css, title="your title") as demo:
+  gr.Markdown('# 問題自動生成')
+  gr.Markdown('[lmqg](https://github.com/asahi417/lm-question-generation)を利用して文章から問題と回答を自動生成します')
   text = gr.Textbox(lines=5, placeholder="input here...",label='文章')
   model_names = gr.Radio(['mt5-small-jaquad-qg', 'mt5-base-jaquad-qg', 'mbart-large-cc25-jaquad-qg'], label='モデルの種類', value='mt5-small-jaquad-qg')
   num_beams = gr.Slider(1, 10, value=4,step=1,label='Number of Beam(degrees of explotaion at interface)')

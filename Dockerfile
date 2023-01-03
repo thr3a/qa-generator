@@ -1,6 +1,15 @@
-FROM thr3a/jupyterlab
+FROM python:3.10
 
-RUN pip install ginza pytextrank lmqg psutil
-RUN python -m spacy download ja_core_news_sm
-ADD download.py /download.py
-RUN python /download.py
+WORKDIR /tmp
+
+ADD requirements.txt ./
+ADD download.py ./
+RUN pip install --no-cache-dir -r requirements.txt \
+  && python -m spacy download ja_core_news_sm \
+  && python ./download.py
+
+WORKDIR /app
+
+ADD server.py ./
+
+CMD ["python", "server.py"]

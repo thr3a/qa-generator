@@ -1,0 +1,4 @@
+ginza==5.1.2
+gradio==3.15.0
+lmqg==0.0.5
+psutil==5.9.4
