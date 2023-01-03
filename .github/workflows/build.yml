@@ -32,19 +32,19 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          push: true
+          push: false
           tags: |
             ${{ env.IMAGE_NAME }}
             ghcr.io/${{ github.repository_owner }}/qa-generator:latest
           file: Dockerfile
 
-      - name: Push remote
-        run: |
-          git config --global user.name thr3a
-          git config --global user.email thr3a@example.com
-          git clone https://${{secrets.MANIFEST_TOKEN}}@github.com/thr3a/kubernetes-manifests /tmp/app
-          cd /tmp/app
-          yq '.spec.template.spec.containers[0].image = "${{ env.IMAGE_NAME }}"' argo/qa-generator/deployment.yaml -i
-          git add .
-          git commit -m "update: ${{ env.IMAGE_NAME }}"
-          git push
+      # - name: Push remote
+      #   run: |
+      #     git config --global user.name thr3a
+      #     git config --global user.email thr3a@example.com
+      #     git clone https://${{secrets.MANIFEST_TOKEN}}@github.com/thr3a/kubernetes-manifests /tmp/app
+      #     cd /tmp/app
+      #     yq '.spec.template.spec.containers[0].image = "${{ env.IMAGE_NAME }}"' argo/qa-generator/deployment.yaml -i
+      #     git add .
+      #     git commit -m "update: ${{ env.IMAGE_NAME }}"
+      #     git push
